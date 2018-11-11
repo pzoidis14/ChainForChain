@@ -4,7 +4,7 @@ import history from '../history';
 import SimpleStorage from './SimpleStorage';
 import VendorComponent from './VendorComponent';
 import ShipperComponent from './ShipperComponent';
-// import TodoList from './TodoList';
+import UserApp from './UserApp';
 
 const Routes = () => (
   <Router history={history}>
@@ -14,7 +14,7 @@ const Routes = () => (
       </span>
       <Switch>
         <Route exact path="/" component={SimpleStorage} />
-        {/* <Route path="/todos" component={TodoList} /> */}
+        <Route path="/todos" component={UserApp} />
         <Route path="/vendor" component={VendorComponent} />
         <Route path="/shipper" component={ShipperComponent} />
       </Switch>

@@ -1,3 +1,60 @@
+class SimpleStorage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      orders: [],
+    };
+  }
+
+  async componentDidMount() {
+    console.log(this);
+  }
+
+  async getOrders() {
+    // use .call() at the end because it is a get method and we need to invoke it this way
+    console.log(this);
+
+    const { contract } = this.props;
+    const totalNumberOfOrders = await contract.getTotalNumOrders.call();
+
+    const pendingOrdersPromiseArray = [];
+    for (let i = 0; i < totalNumberOfOrders; i++) {
+      await pendingOrdersPromiseArray.push(contract.returnOrder.call(i));
+    }
+
+    const orders = await Promise.all(pendingOrdersPromiseArray);
+    this.setState({ orders });
+  }
+
+  render() {
+    const { orders, error } = this.state;
+    return (
+      <div>
+        {error ? (
+          <h1>Oh no! Something went wrong: {error}</h1>
+        ) : (
+          <div>
+            <button onClick={this.getOrders}>Get Orders</button>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+/**
+ * CONTAINER
+ */
+const mapState = state => {
+  return {
+    contract: state.contract,
+    accounts: state.account,
+  };
+};
+
+export default connect(mapState)(SimpleStorage);
+
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 

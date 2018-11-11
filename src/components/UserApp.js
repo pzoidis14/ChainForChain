@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import CreateOrder from './CreateOrder';
-import OpenBids from './OpenBids';
-import { fetchOrdersThunk } from '../store/web3/orders';
 import DisplayTodos from './DisplayTodos.js';
+import CreateTodoBtn from './CreateTodoBtn.js';
 import Contract from 'truffle-contract';
 import SimpleStorageContract from '../../build/contracts/SimpleStorage.json';
 
-class VendorComponent extends Component {
+// import '../css/oswald.css'
+// import '../css/open-sans.css'
+// import '../css/pure-min.css'
+// import '../css/UserApp.css'
+
+class UserApp extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       todoListInstance: {},
       todos: [],
-      error: null,
     };
   }
 
   async componentDidMount() {
-    await this.props.fetchOrders();
     await this.instantiateContract();
     await this.getTodos();
   }
@@ -49,37 +50,20 @@ class VendorComponent extends Component {
       todos,
       todoListInstance: { createTodo, completeTodo },
     } = this.state;
-
+    console.log(todos);
     return (
-      <div>
-        <h1> Create Order: </h1>
-        <CreateOrder fetchOrders={this.props.fetchOrders} />
-        <h1> Open Bids: </h1>
-        <OpenBids
-          fetchOrders={this.props.fetchOrders}
-          submitBid={this.props.submitBid}
-          orders={this.props.orders.filter(order => order.bid)}
-          createTodo={createTodo}
-        />
-        <DisplayTodos completeTodo={completeTodo} todos={todos} />
-      </div>
+      <main className="container">
+        <div className="pure-g">
+          <div className="pure-u-1-1">
+            <h1>My todos!</h1>
+            <p>Coming directly from my smart contract</p>
+            <DisplayTodos completeTodo={completeTodo} todos={todos} />
+            <CreateTodoBtn createTodo={createTodo} />
+          </div>
+        </div>
+      </main>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    orders: state.orders,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchOrders: () => dispatch(fetchOrdersThunk()),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(VendorComponent);
+export default UserApp;

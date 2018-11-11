@@ -2,6 +2,7 @@ import React from 'react';
 import { GridList, Card, Divider } from 'material-ui/';
 import BidPreview from './BidPreview';
 import BidComponent from './SubmitBid';
+import CreateTodoBtn from './CreateTodoBtn.js';
 
 const styles = {
   root: {
@@ -34,6 +35,7 @@ const OpenBids = props => {
                   submitBid={props.submitBid}
                   fetchOrders={props.fetchOrders}
                 />
+                <CreateTodoBtn createTodo={props.createTodo} order={order} />
               </Card>
             </div>
           ))
