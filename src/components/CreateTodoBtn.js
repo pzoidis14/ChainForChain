@@ -5,30 +5,45 @@ export default class CreateToDoBtn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      taskName: '',
+      // taskName: '',
     };
+    this.handlecreateTodo = this.handleCreateTodo.bind(this);
   }
 
-  handleInputChange(event) {
-    this.setState({ taskName: event.target.value });
-  }
+  // handleInputChange(event) {
+  //   this.setState({ taskName: event.target.value });
+  // }
 
   async handleCreateTodo() {
-    const { taskName } = this.state;
-    const { createTodo } = this.props;
+    const {
+      orderName,
+      description,
+      daysToDeliver,
+      price,
+      dailyAttrition,
+      attritionCutoff,
+    } = this.props.order;
+    const { createOrder } = this.props;
 
     /* CREATE THE TODO HERE */
     window.web3.eth.getAccounts(async (err, accounts) => {
       if (err) throw new Error(err);
-      await createTodo(taskName, { from: accounts[0] });
-      this.setState({ tskName: '' });
+      await createOrder(
+        orderName,
+        description,
+        daysToDeliver,
+        price,
+        dailyAttrition,
+        attritionCutoff,
+        { from: accounts[0] }
+      );
+      // this.setState({ tskName: '' });
     });
   }
 
   render() {
-    const { taskName } = this.state;
     return (
-      <button onClick={this.handleCreateTodo.bind(this)} bsStyle="info">
+      <button onClick={this.handleCreateOrder} bsStyle="info">
         Create To Do
       </button>
     );

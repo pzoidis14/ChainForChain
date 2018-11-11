@@ -35,7 +35,7 @@ const OpenBids = props => {
                   submitBid={props.submitBid}
                   fetchOrders={props.fetchOrders}
                 />
-                <CreateTodoBtn createTodo={props.createTodo} order={order} />
+                <CreateTodoBtn createOrder={props.createOrder} order={order} />
               </Card>
             </div>
           ))

@@ -11,8 +11,8 @@ class VendorComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todoListInstance: {},
-      todos: [],
+      orderListInstance: {},
+      orders: [],
       error: null,
     };
   }
@@ -20,34 +20,34 @@ class VendorComponent extends Component {
   async componentDidMount() {
     await this.props.fetchOrders();
     await this.instantiateContract();
-    await this.getTodos();
+    await this.getOrders();
   }
 
   async instantiateContract() {
-    const todoList = Contract(SimpleStorageContract);
-    todoList.setProvider(window.web3.currentProvider);
-    const todoListInstance = await todoList.deployed();
-    this.setState({ todoListInstance });
+    const orderList = Contract(SimpleStorageContract);
+    orderList.setProvider(window.web3.currentProvider);
+    const orderListInstance = await orderList.deployed();
+    this.setState({ orderListInstance });
   }
 
-  async getTodos() {
-    const totalNumberOfTodos = await this.state.todoListInstance.getTotalNumTodos.call();
+  async getOrders() {
+    const totalNumberOfOrders = await this.state.orderListInstance.getTotalNumOrders.call();
 
-    const pendingTodosPromiseArray = [];
-    for (let i = 0; i < totalNumberOfTodos; i++) {
-      pendingTodosPromiseArray.push(
-        this.state.todoListInstance.returnTodo.call(i)
+    const pendingOrdersPromiseArray = [];
+    for (let i = 0; i < totalNumberOfOrders; i++) {
+      pendingOrdersPromiseArray.push(
+        this.state.orderListInstance.returnOrder.call(i)
       );
     }
 
-    const todos = await Promise.all(pendingTodosPromiseArray);
-    this.setState({ todos });
+    const orders = await Promise.all(pendingOrdersPromiseArray);
+    this.setState({ orders });
   }
 
   render() {
     const {
-      todos,
-      todoListInstance: { createTodo, completeTodo },
+      orders,
+      orderListInstance: { createOrder, vendorCompleteOrder },
     } = this.state;
 
     return (
@@ -59,9 +59,12 @@ class VendorComponent extends Component {
           fetchOrders={this.props.fetchOrders}
           submitBid={this.props.submitBid}
           orders={this.props.orders.filter(order => order.bid)}
-          createTodo={createTodo}
+          createOrder={createOrder}
         />
-        <DisplayTodos completeTodo={completeTodo} todos={todos} />
+        {/* <DisplayTodos
+          vendorCompleteOrder={vendorCompleteOrder}
+          orders={orders}
+        /> */}
       </div>
     );
   }

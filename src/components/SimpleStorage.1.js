@@ -129,3 +129,27 @@ const mapState = state => {
 };
 
 export default connect(mapState)(SimpleStorage);
+
+
+
+
+
+
+
+Create todo btun 10
+async handleCreateTodo() {
+  const { orderName, description, daysToDeliver, price, dailyAttrition, attritionCutoff } = this.props.order;
+  const { createTodo } = this.props;
+
+  /* CREATE THE TODO HERE */
+  window.web3.eth.getAccounts(async (err, accounts) => {
+    if (err) throw new Error(err);
+    await createTodo(orderName, description, daysToDeliver, price, dailyAttrition, attritionCutoff, { from: accounts[0] });
+    // this.setState({ tskName: '' });
+  });
+}
+
+
+
+open bid 38
+<CreateTodoBtn createTodo={props.createTodo} order={order} />
