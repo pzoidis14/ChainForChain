@@ -9,7 +9,6 @@ const BidPreview = props => {
     <div>
       <CardText>
         <div>
-          {console.log('hit')}
           <p>Name: {order.orderName}</p>
           <p>Description: {order.description}</p>
           <p>Days To Deliver: {order.daysToDeliver} days</p>

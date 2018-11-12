@@ -51,20 +51,29 @@ class VendorComponent extends Component {
     } = this.state;
 
     return (
-      <div>
+      <div className="center">
         <h1> Create Order: </h1>
         <CreateOrder fetchOrders={this.props.fetchOrders} />
-        <h1> Open Bids: </h1>
-        <OpenBids
-          fetchOrders={this.props.fetchOrders}
-          submitBid={this.props.submitBid}
-          orders={this.props.orders.filter(order => order.bid)}
-          createOrder={createOrder}
-        />
-        {/* <DisplayTodos
-          vendorCompleteOrder={vendorCompleteOrder}
-          orders={orders}
-        /> */}
+        <div>
+          <h1> Open Bids: </h1>
+          <OpenBids
+            fetchOrders={this.props.fetchOrders}
+            submitBid={this.props.submitBid}
+            orders={this.props.orders.filter(
+              order => order.bid && !order.orderStatus
+            )}
+            createOrder={createOrder}
+          />
+        </div>
+        <div style={{ margin: 80 }} />
+
+        <div>
+          <h1>Open Orders:</h1>
+          <DisplayTodos
+            vendorCompleteOrder={vendorCompleteOrder}
+            orders={orders}
+          />
+        </div>
       </div>
     );
   }

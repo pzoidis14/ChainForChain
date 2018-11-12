@@ -1,8 +1,8 @@
 import React from 'react';
 import { GridList, Card, Divider } from 'material-ui/';
 import BidPreview from './BidPreview';
-import BidComponent from './SubmitBid';
-import CreateTodoBtn from './CreateTodoBtn.js';
+// import BidComponent from './SubmitBid';
+import CreateOrderBtn from './CreateOrderBtn.js';
 
 const styles = {
   root: {
@@ -30,12 +30,12 @@ const OpenBids = props => {
               <Card>
                 <BidPreview order={order} />
                 <Divider />
-                <BidComponent
-                  orderId={order.orderId}
+                {/* <BidComponent
+                  orderId={order.id}
                   submitBid={props.submitBid}
-                  fetchOrders={props.fetchOrders}
+                  fetchOrders={props.fetchOrders} */}
                 />
-                <CreateTodoBtn createOrder={props.createOrder} order={order} />
+                <CreateOrderBtn createOrder={props.createOrder} order={order} />
               </Card>
             </div>
           ))

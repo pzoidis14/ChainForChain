@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import OpenOrders from './OpenOrders';
 import { fetchOrdersThunk, updateOrderThunk } from '../store/web3/orders';
-import DisplayTodos from './DisplayTodos.js';
-import CreateTodoBtn from './CreateTodoBtn.js';
 import Contract from 'truffle-contract';
 import SimpleStorageContract from '../../build/contracts/SimpleStorage.json';
 

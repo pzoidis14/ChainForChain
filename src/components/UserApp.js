@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DisplayTodos from './DisplayTodos.js';
-import CreateTodoBtn from './CreateTodoBtn.js';
+import CreateTodoBtn from './CreateOrderBtn.js';
 import Contract from 'truffle-contract';
 import SimpleStorageContract from '../../build/contracts/SimpleStorage.json';
 

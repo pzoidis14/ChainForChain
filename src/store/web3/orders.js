@@ -42,6 +42,7 @@ export const updateOrderThunk = (
       let entryMatch = await JSON.parse(localStorage.getItem(orderId));
 
       entryMatch.bid = true;
+      entryMatch.orderStatus = false;
       entryMatch.daysToDeliver = daysToDeliver;
       entryMatch.price = price;
       entryMatch.dailyAttrition = dailyAttrition;

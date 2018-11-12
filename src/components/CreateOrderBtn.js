@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
-// import { Button, FormGroup, InputGroup, FormControl } from 'react-bootstrap';
 
-export default class CreateToDoBtn extends Component {
+export default class CreateOrderButton extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // taskName: '',
-    };
-    this.handlecreateTodo = this.handleCreateTodo.bind(this);
+    this.state = {};
+    this.handleCreateOrder = this.handleCreateOrder.bind(this);
   }
 
-  // handleInputChange(event) {
-  //   this.setState({ taskName: event.target.value });
-  // }
-
-  async handleCreateTodo() {
+  async handleCreateOrder() {
     const {
       orderName,
       description,
@@ -37,7 +30,6 @@ export default class CreateToDoBtn extends Component {
         attritionCutoff,
         { from: accounts[0] }
       );
-      // this.setState({ tskName: '' });
     });
   }
 

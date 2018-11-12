@@ -1,50 +1,62 @@
 import React from 'react';
 // import { Table, thead, tr, th, tbody, td, Jumbotron } from 'react-bootstrap';
 // import CompleteTodoBtn from './CompleteTodoBtn'
+import ContractsComponent from './ContractsComponent';
 
-const DisplayTodos = ({ todos, completeTodo }) => (
+const DisplayOrders = ({ orders, vendorCompleteOrder }) => (
   <div>
-    {todos && todos.length > 0 ? (
-      <table responsive>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Task</th>
-            <th>Completed</th>
-          </tr>
-        </thead>
-        <tbody>
-          {todos.map(([task, completionStatus], id) => (
-            <tr key={id}>
-              <td>{id}</td>
-              <td>{task}</td>
-              <td>{completionStatus.toString()}</td>
-              <td>
-                <button
-                  onClick={() => {
-                    window.web3.eth.getAccounts((err, [account]) => {
-                      if (err) throw new Error(err);
-                      else completeTodo(id, { from: account });
-                    });
-                  }}
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    {orders && orders.length > 0 ? (
+      <div>
+        {orders.map(
+          ([
+            orderName,
+            description,
+            daysToDeliver,
+            price,
+            dailyAttrition,
+            attritionCutoff,
+            shipperComplete,
+            vendorComplete,
+          ]) => (
+            <div>
+              {console.log('orderName :', orderName)}
+              {console.log('description :', description)}
+              {console.log('daysToDeliver :', daysToDeliver)}
+              {console.log('price :', price)}
+              {console.log('dailyAttrition :', dailyAttrition)}
+              {console.log('attritionCutoff :', attritionCutoff)}
+              {console.log('shipperComplete :', shipperComplete)}
+              {console.log('vendorComplete :', vendorComplete)}
+              <ContractsComponent
+                orderName={orderName}
+                description={description}
+                daysToDeliver={daysToDeliver}
+                price={price}
+                dailyAttrition={dailyAttrition}
+                attritionCutoff={attritionCutoff}
+                shipperComplete={shipperComplete}
+                vendorComplete={vendorComplete}
+              />
+              {/* <button
+              onClick={() => {
+                console.log('hit2');
+                window.web3.eth.getAccounts((err, [account]) => {
+                  if (err) throw new Error(err);
+                  else vendorCompleteOrder(order.id, { from: account });
+                });
+              }}
+            /> */}
+            </div>
+          )
+        )}
+      </div>
     ) : (
       <div>
-        {/* <Jumbotron> */}
-        <h1>No todos! </h1>
-        <p>
-          You either don't have any todos yet or are not passing an array of
-          todos to the DisplayTodos Component
-        </p>
-        {/* </Jumbotron> */}
+        <h3>No orders! </h3>
+        <p>You don't have any open contracts yet.</p>
       </div>
     )}
   </div>
 );
 
-export default DisplayTodos;
+export default DisplayOrders;

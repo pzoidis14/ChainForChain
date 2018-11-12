@@ -1,12 +1,14 @@
 /* PAGE */
 
 body,
-.pure-g [class*=pure-u] {
+.pure-g [class*='pure-u'] {
   font-family: 'Open Sans', sans-serif;
-  background-color: #DDDDDD
+  background-color: #dddddd;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: 'Oswald', 'Arial Narrow', sans-serif;
 }
 
@@ -31,6 +33,6 @@ code {
   background-color: #233e5e;
 }
 
-.pure-form input[type="text"]:focus {
+.pure-form input[type='text']:focus {
   border-color: #0c1a2b;
 }
